@@ -1,23 +1,614 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
-    <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
-    </nav>
+
+  <style>
+        /* 기본 스타일 및 색상 변수 */
+        :root {
+            --primary-color: #007bff; /* 파란색 계열 */
+            --secondary-color: #28a745; /* 녹색 계열 */
+            --accent-color: #ffc107; /* 노란색 계열 */
+            --text-color: #333;
+            --bg-light: #f8f9fa; /* 밝은 회색 배경 */
+            --bg-white: #ffffff;
+            --font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif;
+        }
+
+        body {
+            font-family: var(--font-family);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            color: var(--text-color);
+            background-color: var(--bg-light);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        header {
+            background-color: var(--bg-white);
+            border-bottom: 3px solid var(--primary-color);
+            padding: 10px 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        header h1 {
+            font-size: 1.8rem;
+            margin: 0;
+        }
+
+        header a {
+            text-decoration: none;
+            color: var(--primary-color);
+        }
+
+        /* Hero 섹션 디자인 */
+        .hero {
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+            border-radius: 0 0 15px 15px;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .hero .highlight {
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 2px 10px;
+            border-radius: 5px;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: #333;
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 50px;
+            margin-top: 30px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .cta-btn:hover {
+            background-color: #e0ac00;
+            transform: translateY(-2px);
+        }
+
+        /* 컨텐츠 섹션 디자인 */
+        .content-section {
+            padding: 60px 0;
+        }
+
+        .content-section h2 {
+            font-size: 2rem;
+            color: var(--primary-color);
+            border-bottom: 3px solid #eee;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+
+        .content-section h3 {
+            font-size: 1.6rem;
+            color: var(--text-color);
+            margin-top: 40px;
+            border-left: 5px solid var(--secondary-color);
+            padding-left: 10px;
+        }
+
+        .content-section p {
+            font-size: 1rem;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .content-section ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .content-section ul li {
+            position: relative;
+            padding-left: 25px;
+            margin-bottom: 10px;
+        }
+
+        .content-section ul li::before {
+            content: "\2713"; /* 체크 표시 */
+            color: var(--secondary-color);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        /* 폼 섹션 디자인 */
+        .comparison-form-box {
+            background-color: var(--bg-white);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .comparison-form-box h2 {
+            text-align: center;
+            color: var(--primary-color);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: var(--text-color);
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 1rem;
+        }
+
+        .form-group select {
+            appearance: none; /* 기본 드롭다운 스타일 제거 */
+            background: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12"><path fill="%23333" d="M7 9l-3-3 3-3z"/></svg>') no-repeat right 10px center;
+            background-size: 10px;
+        }
+
+        /* 표 디자인 */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: var(--bg-white);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .data-table th, .data-table td {
+            border: 1px solid #ddd;
+            padding: 15px;
+            text-align: left;
+        }
+
+        .data-table th {
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .data-table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        /* FAQ 섹션 */
+        .faq-item {
+            background-color: var(--bg-white);
+            border: 1px solid #ddd;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item h3 {
+            background-color: #f0f4f8;
+            padding: 20px;
+            margin: 0;
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            position: relative;
+            border-bottom: 1px solid transparent;
+            transition: background-color 0.3s ease;
+        }
+
+        .faq-item.active h3 {
+            background-color: var(--primary-color);
+            color: white;
+            border-bottom: 1px solid var(--primary-color);
+        }
+
+        .faq-item h3::after {
+            content: "+";
+            position: absolute;
+            right: 20px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item.active h3::after {
+            content: "-";
+        }
+
+        .faq-item p {
+            padding: 20px;
+            margin: 0;
+            display: none;
+            line-height: 1.8;
+        }
+
+        /* 외부 링크 스타일 */
+        .link-source {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .link-source:hover {
+            text-decoration: underline;
+        }
+        
+        /* 네이버 스니펫 최적화 키워드 박스 */
+        .keyword-box {
+            background-color: var(--bg-white);
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid #eee;
+            margin-top: 30px;
+        }
+        .keyword-box p {
+            margin: 5px 0;
+            font-size: 0.9rem;
+            color: #555;
+        }
+        .keyword-box strong {
+            color: var(--primary-color);
+        }
+
+    </style>
+
+    <!-- SEO를 위한 JSON-LD (FAQPage) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "그랑 콜레오스 보험료 평균은 얼마인가요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "그랑 콜레오스 보험료 평균은 운전자의 연령, 운전 경력, 사고 이력 등 다양한 요소에 따라 크게 달라집니다. 일반적으로 20대 운전자의 경우 100만 원 이상, 30대 이상 무사고 운전자의 경우 70~90만 원 선에서 형성되지만, 정확한 금액은 개인별 견적을 통해 확인하는 것이 가장 좋습니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "그랑 콜레오스 보험료를 저렴하게 가입하는 방법이 있나요?",
+          "@id": "#절약팁-답변",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "네, 그랑 콜레오스 보험료를 절약하는 방법으로는 '마일리지 특약'을 활용해 연간 주행거리에 따른 할인을 받는 것이 가장 효과적입니다. 또한, '블랙박스 할인'과 '첨단 안전장치(ADAS) 할인'을 통해 추가 할인을 받을 수 있으며, 여러 보험사의 견적을 비교하는 것이 필수적입니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "그랑 콜레오스 수리비용이 보험료에 미치는 영향은 무엇인가요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "그랑 콜레오스의 수입차 부품 사용 여부나 수리 난이도는 차량 모델별 보험료 산정 기준에 영향을 미칩니다. 일반적으로 부품 가격이 높고 수리가 까다로운 차량은 사고 발생 시 보험사의 손해율이 높아져 보험료가 상승할 수 있습니다. 특히 경미한 사고라도 수리비용이 물적 할증 기준을 초과하면 할증이 적용됩니다."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "다이렉트 보험으로 가입하면 보험료가 얼마나 저렴해지나요?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "다이렉트 보험은 설계사 수수료가 제외되어 오프라인 보험 대비 평균 15% 이상 저렴하게 가입할 수 있습니다. 그랑 콜레오스 모델 역시 다이렉트 보험 비교를 통해 보험사별 할인율과 특약을 꼼꼼하게 확인하여 최저가 견적을 찾는 것이 좋습니다."
+          }
+        }
+      ]
+    }
+    </script>
+
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <h1><a href="/">그랑 콜레오스 보험료 견적 비교 센터</a></h1>
+        </div>
+    </header>
+
     <main>
-      <h1>Home page</h1>
+        <!-- 히어로 섹션: 핵심 키워드 강조 및 CTA -->
+        <section class="hero">
+            <div class="container">
+                <h1>2026년 <span class="highlight">그랑 콜레오스 보험료</span>, 가장 저렴하게 가입하는 방법</h1>
+                <p>복잡한 보험료 계산, 이제 전문가가 대신해 드립니다. 그랑 콜레오스 맞춤형 할인 특약부터 평균 견적까지 모두 확인하세요.</p>
+                <a href="#quote-form-section" class="cta-btn">그랑 콜레오스 보험료 실시간 견적 비교하기</a>
+            </div>
+        </section>
+
+        <!-- 핵심 요약 및 비교 견적 폼 섹션 -->
+        <section id="quote-form-section" class="content-section" style="background-color: var(--bg-light); padding: 40px 0;">
+            <div class="container">
+                <div class="comparison-form-box">
+                    <h2>르노 그랑 콜레오스 보험료 실시간 예측 분석</h2>
+                    <p>간단한 정보 입력으로 <strong>그랑 콜레오스 최저가 보험료</strong>를 예측하고, 보험사별 견적을 비교해드립니다. 숨겨진 할인율을 찾아보세요.</p>
+                    <form action="#" method="post">
+                        <div class="form-group">
+                            <label for="car-model">차량 정보 (차종/연식)</label>
+                            <input type="text" id="car-model" placeholder="예: 르노 그랑 콜레오스 2024년식" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="driver-age">운전자 연령</label>
+                            <input type="number" id="driver-age" placeholder="예: 35" required min="18" max="99">
+                        </div>
+                        <div class="form-group">
+                            <label for="driver-career">운전 경력 (최근 3년 기준)</label>
+                            <input type="number" id="driver-career" placeholder="예: 5년" required min="0">
+                        </div>
+                        <div class="form-group">
+                            <label for="accident-count">최근 3년간 사고 건수</label>
+                            <input type="number" id="accident-count" placeholder="0" required min="0" max="10">
+                        </div>
+                        <div class="form-group">
+                            <label for="damage-amount">물적 손해(대물) 처리 금액 (최근 사고 기준)</label>
+                            <input type="text" id="damage-amount" placeholder="예: 50만 원 또는 300만 원" required>
+                        </div>
+                        <button type="submit" class="cta-btn">최저가 견적 비교하기</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEO 상세 컨텐츠 1: 그랑 콜레오스 보험료 결정 요인 분석 -->
+        <section class="content-section">
+            <div class="container">
+                <h2 id="grandkoleos-analysis">그랑 콜레오스 보험료: 왜 다른 차종보다 비싸거나 저렴할까?</h2>
+                <p>르노코리아의 그랑 콜레오스(Grand Koleos)는 독특한 매력으로 많은 운전자에게 사랑받고 있습니다. 하지만 차량을 구매하기 전, 보험료 견적을 확인하는 것은 필수입니다. 그랑 콜레오스 보험료는 일반적인 국산 중형 SUV와 비교했을 때 몇 가지 특징적인 요인으로 인해 다르게 책정될 수 있습니다.</p>
+                <p>보험사는 차량 모델별로 사고 발생률, 부품 수급 용이성, 수리 난이도, 차량 가액 등을 종합적으로 판단하여 손해율을 산출합니다. 그랑 콜레오스의 경우, 르노의 글로벌 플랫폼을 공유하는 만큼, 부품 가격이나 수리비용이 일반적인 국산차와 차이가 발생할 수 있습니다. 2026년 기준으로 그랑 콜레오스의 보험료를 결정하는 핵심 요인은 다음과 같습니다.</p>
+                <ul>
+                    <li><strong>1. 차량 모델별 위험 등급:</strong> 보험개발원에서는 모든 차량 모델에 대해 등급(1~26등급)을 부여합니다. 등급이 높을수록 보험료 할인이 적용됩니다. 그랑 콜레오스의 정확한 등급을 확인해야 합니다.</li>
+                    <li><strong>2. 운전자 특성:</strong> 운전자 연령, 운전 경력, 성별, 사고 이력 등 개인별 요인이 가장 큰 비중을 차지합니다. 특히 30대 이상 무사고 운전자일수록 보험료가 저렴합니다.</li>
+                    <li><strong>3. 첨단 안전장치(ADAS) 장착 여부:</strong> 그랑 콜레오스에 기본 또는 옵션으로 장착된 ADAS(긴급 제동 보조, 차선 이탈 방지 등) 기능은 사고 위험을 줄여주기 때문에 보험료 할인 특약으로 적용될 수 있습니다.</li>
+                    <li><strong>4. 부품 수급 및 수리 용이성:</strong> 수입 부품 의존도가 높거나 수리 과정이 복잡한 차량은 보험료가 할증되는 경향이 있습니다. 그랑 콜레오스는 르노코리아의 국산화 노력으로 부품 수급이 비교적 원활하지만, 일부 부품은 수입차의 특성을 가질 수 있습니다.</li>
+                </ul>
+
+                <h3 id="repaircost">그랑 콜레오스 수리비용과 보험료의 상관관계</h3>
+                <p>보험사 손해율에 큰 영향을 미치는 것은 바로 '차량 수리비용'입니다. 그랑 콜레오스는 고가 부품을 포함한 첨단 기술이 적용된 모델일수록 사고 발생 시 수리비용이 높아져 보험료가 상승할 수 있습니다. 특히 헤드램프, 레이더 센서 등이 파손되면 수리비용이 수백만 원에 달할 수 있습니다.</p>
+                <p><strong>할증 기준 및 대처법:</strong> 2026년 기준, 경미한 접촉사고라도 수리비용이 물적 할증 기준 금액(보통 200만 원)을 초과하면 다음 해 보험료가 할증됩니다. 그랑 콜레오스 운전자는 경미한 사고 시 자비 처리 여부를 신중하게 판단하여 장기적인 보험료 절약을 고려해야 합니다.</p>
+            </div>
+        </section>
+
+        <!-- SEO 상세 컨텐츠 2: 그랑 콜레오스 평균 보험료와 견적 비교 팁 -->
+        <section class="content-section" style="background-color: var(--bg-light);">
+            <div class="container">
+                <h2 id="averageprice">그랑 콜레오스 평균 보험료 예상 견적 및 할인/할증 분석</h2>
+                <p>그랑 콜레오스의 평균 보험료는 운전자 특성에 따라 크게 달라집니다. 특히 30대 무사고 운전자의 경우, 20대 운전자 대비 약 30% 이상 저렴한 보험료를 기대할 수 있습니다. 2026년 다이렉트 보험을 기준으로 한 평균 견적은 다음과 같습니다.</p>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>운전자 유형 (만 35세, 무사고 기준)</th>
+                            <th>예상 보험료 (연간)</th>
+                            <th>핵심 절약 팁</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>그랑 콜레오스 일반 가입자</strong> (오프라인 가입)</td>
+                            <td>약 90만 원 ~ 110만 원</td>
+                            <td>다이렉트 보험으로 전환 시 최소 15% 절약 가능</td>
+                        </tr>
+                        <tr>
+                            <td><strong>다이렉트 가입자</strong> (마일리지, 블랙박스 할인 적용)</td>
+                            <td>약 70만 원 ~ 85만 원</td>
+                            <td>특약 할인 극대화 및 보험사별 비교 견적 필수</td>
+                        </tr>
+                        <tr>
+                            <td><strong>초보 운전자</strong> (20대, 운전 경력 1년 미만)</td>
+                            <td>약 150만 원 ~ 200만 원</td>
+                            <td>부모님 차량 공동 등록, 경력 인정 등록으로 보험료 절감 노력</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p><strong>할인율을 높이는 '그랑 콜레오스' 맞춤형 할인 특약 활용법:</strong></p>
+                <p>그랑 콜레오스 운전자는 차량에 탑재된 첨단 기능들을 적극 활용해야 합니다. 특히 최근 출시된 모델일수록 ADAS 장치가 강화되어, 이를 통해 보험료 할인을 받을 수 있는 가능성이 높습니다. 보험사별 ADAS 할인율을 꼼꼼히 비교하여 가입하는 것이 중요합니다.</p>
+
+                <div class="graph-representation" style="margin-top: 30px; background-color: white; padding: 20px; border-radius: 8px;">
+                    <h3 style="color: var(--primary-color);">그랑 콜레오스 보험료 비교 시뮬레이션 (다이렉트 vs. 오프라인)</h3>
+                    <img src="https://via.placeholder.com/800x300?text=Grand+Koleos+Insurance+Premium+Comparison+Graph" alt="그랑 콜레오스 보험료 비교 그래프" style="width: 100%; height: auto; display: block;">
+                    <p style="text-align: center; font-size: 0.9rem; margin-top: 10px;">(상기 그래프는 예시이며, 실제 보험료는 운전자 정보에 따라 달라집니다.)</p>
+                    <p>그래프에서 볼 수 있듯이, 다이렉트 보험은 오프라인 가입 대비 약 15%~20%의 가격 차이를 보입니다. 그랑 콜레오스의 경우도 마찬가지입니다. 특히 운전 경력이 짧거나 사고 이력이 있는 경우, 이 격차는 더욱 커질 수 있습니다.</p>
+                </div>
+
+                <h3 id="disadvantage">그랑 콜레오스 보험 가입의 장단점 분석</h3>
+                <p>그랑 콜레오스 모델은 르노의 기술력이 집약되어 안전성은 뛰어나지만, 수입차와 유사한 부품 구조로 인해 수리비용이 국산차 대비 높게 책정될 수 있다는 점이 단점입니다. 이는 보험료 할증에 영향을 미치므로, 보험 가입 시 자기차량손해(자차) 특약의 자기부담금을 적절히 설정하는 것이 중요합니다.</p>
+            </div>
+        </section>
+
+        <!-- SEO 상세 컨텐츠 3: 보험료 절약 팁과 가입 전략 -->
+        <section class="content-section">
+            <div class="container">
+                <h2 id="savemoney">그랑 콜레오스 보험료 절약 팁: 현명한 가입 전략</h2>
+                <p>그랑 콜레오스 운전자들이 보험료를 절약하기 위해 반드시 알아야 할 2026년 최신 가입 팁입니다. 특히 다이렉트 보험 가입 시에는 반드시 여러 보험사의 할인 특약을 확인하여 비교해야 합니다.</p>
+
+                <h3 id="mileage">1. 마일리지(주행거리) 특약 활용 극대화</h3>
+                <p>그랑 콜레오스 운전자 중 연간 주행거리가 짧다면 마일리지 특약을 반드시 활용해야 합니다. 연간 주행거리가 15,000km 이하인 경우, 주행거리 구간에 따라 보험료를 환급받을 수 있습니다. 르노코리아 차량 운전자는 주행 스타일이 다양하므로, 자신의 주행 패턴을 파악하여 최적의 마일리지 특약을 선택하는 것이 중요합니다.</p>
+                <ul>
+                    <li><strong>할인율:</strong> 보험사별로 차이가 있지만, 보통 2,000km~15,000km 구간에 따라 10%~30% 할인이 적용됩니다.</li>
+                    <li><strong>적용 방법:</strong> 가입 시점 또는 보험 만기 시점에 계기판 사진을 제출하여 주행거리를 인증합니다.</li>
+                </ul>
+
+                <h3 id="adasdiscount">2. 첨단 안전장치(ADAS) 및 블랙박스 할인</h3>
+                <p>그랑 콜레오스 차량에 장착된 ADAS 기능은 보험료 할인으로 이어집니다. 차선이탈 경보 장치(LDWS), 전방 충돌 방지 장치(FCW) 등이 대표적인 할인 대상입니다. 블랙박스 역시 보험료 할인 특약으로 보편화되어 있으므로, 반드시 확인해야 합니다. 안전운전 할인(티맵, 카카오내비) 특약도 그랑 콜레오스 운전자들에게 인기가 높습니다.</p>
+
+                <h3 id="comparison">3. 다이렉트 보험 비교견적으로 최저가 찾기</h3>
+                <p>그랑 콜레오스 모델은 보험사별로 위험률 산정이 다소 차이가 날 수 있습니다. 한 곳의 보험사만 고집하지 않고, 다이렉트 비교견적 사이트를 통해 최소 7~8개 보험사의 견적을 받아보는 것이 좋습니다. 2026년 기준으로 다이렉트 보험료는 오프라인 대비 평균 15% 이상 저렴하며, 그랑 콜레오스의 경우 최대 30%까지 절약할 수 있다는 후기가 많습니다.</p>
+                <p><strong>할인율 및 혜택 비교 시 중요 키워드:</strong> #그랑 콜레오스 다이렉트 보험, #그랑 콜레오스 가입 순위, #그랑 콜레오스 보험료 비교견적, #그랑 콜레오스 싼곳, #그랑 콜레오스 내돈내산 후기</p>
+
+                <!-- 정보성 이미지 삽입 (HTML로 텍스트화) -->
+                <div style="background-color: #f0f4f8; padding: 20px; border-radius: 8px; margin-top: 30px;">
+                    <h4 style="color: var(--primary-color);">그랑 콜레오스 운전자 유형별 보험료 시뮬레이션</h4>
+                    <p><strong>운전자 A:</strong> 40대, 10년 무사고 경력, 연간 주행거리 1만km 미만. (블랙박스/마일리지 특약 적용)</p>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>구분</th>
+                                <th>오프라인 보험 견적 (예상)</th>
+                                <th>다이렉트 보험 견적 (예상)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>연간 보험료</td>
+                                <td>약 85만 원</td>
+                                <td>약 68만 원 (20% 절약)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEO 상세 컨텐츠 4: 그랑 콜레오스 사고 처리와 보험료 할증 -->
+        <section class="content-section" style="background-color: #fff;">
+            <div class="container">
+                <h2 id="accident-impact">그랑 콜레오스 사고 발생 시 보험료 할증 기준</h2>
+                <p>그랑 콜레오스 차량도 사고 발생 시 보험료가 할증되는 것은 피할 수 없습니다. 특히 그랑 콜레오스의 수입 부품이나 첨단 시스템 수리비용은 일반 국산차보다 높아, 경미한 사고로도 물적 할증 기준 금액(200만 원)을 초과할 위험이 있습니다.</p>
+                <p><strong>사고 건수별 할증률 및 등급 변화:</strong></p>
+                <p>2026년 기준, 보험사는 사고 건수에 따라 '사고 점수'를 부여하여 보험료를 산출합니다. 그랑 콜레오스 운전자도 마찬가지로 1점(사고 건수)당 할증률이 적용됩니다. 경미한 사고라도 건수가 많아지면 할증 폭이 커지며, 2건 이상의 사고부터는 3년간 할증이 유지될 수 있습니다.</p>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>사고 유형</th>
+                            <th>그랑 콜레오스 수리비 (예상)</th>
+                            <th>할증 등급 변화 (예시)</th>
+                            <th>보험료 할증률 (예상)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>단순 접촉사고 (대인 없음, 물적 할증 기준 미만)</td>
+                            <td>약 50만 원 ~ 150만 원</td>
+                            <td>1등급 하락 (경미 사고 건수 할증)</td>
+                            <td>5% ~ 10% 할증</td>
+                        </tr>
+                        <tr>
+                            <td>중규모 대물 사고 (물적 할증 기준 초과)</td>
+                            <td>약 200만 원 ~ 500만 원</td>
+                            <td>2등급 이상 하락</td>
+                            <td>20% 이상 할증</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3 id="external-references">신뢰성 있는 외부 사이트 참조 (출처)</h3>
+                <p>그랑 콜레오스 보험료 및 자동차보험 관련 규정에 대한 자세한 정보는 다음 기관에서 확인할 수 있습니다.</p>
+                <ul>
+                    <li><strong>금융감독원(FSS):</strong> 보험료 산정 및 소비자 보호 규정 안내. <a href="https://www.fss.or.kr/" target="_blank" class="link-source">금융감독원 공식 웹사이트</a></li>
+                    <li><strong>보험개발원:</strong> 차량 모델별 보험료 등급 및 통계 정보. <a href="https://www.kidi.or.kr/" target="_blank" class="link-source">보험개발원 공식 웹사이트</a></li>
+                    <li><strong>국토교통부:</strong> 자동차 관리법 및 안전 기준. <a href="https://www.molit.go.kr/" target="_blank" class="link-source">국토교통부 공식 웹사이트</a></li>
+                    <li><strong>나무위키:</strong> 자동차보험 할증 관련 상세 설명 및 예시. <a href="https://namu.wiki/w/자동차보험" target="_blank" class="link-source">나무위키 자동차보험 항목</a></li>
+                    <li><strong>르노코리아자동차:</strong> 그랑 콜레오스 차량 제원 및 부품 정보. <a href="https://www.renaultkorea.com/" target="_blank" class="link-source">르노코리아자동차 공식 웹사이트</a></li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- SEO 상세 컨텐츠 5: 연관 검색어 키워드 활용 (네이버 스니펫 최적화) -->
+        <section class="content-section">
+            <div class="container">
+                <h2 id="related-keywords">그랑 콜레오스 운전자들이 함께 찾는 키워드</h2>
+                <p>그랑 콜레오스 보험료를 검색하는 운전자는 대개 다음과 같은 키워드에도 관심을 갖습니다. 이러한 키워드를 통해 더 합리적인 소비 결정을 내릴 수 있습니다.</p>
+
+                <div class="keyword-box">
+                    <strong>네이버 연관 검색어 및 자동완성 키워드:</strong>
+                    <p>#그랑 콜레오스 보험료 평균 #그랑 콜레오스 보험료 견적 #그랑 콜레오스 보험료 계산 #그랑 콜레오스 다이렉트 보험 #그랑 콜레오스 보험료 싼 곳 #그랑 콜레오스 연비 #그랑 콜레오스 수리비용 #그랑 콜레오스 장단점 #그랑 콜레오스 내돈내산 후기 #그랑 콜레오스 중고 가격 #그랑 콜레오스 안전등급 #그랑 콜레오스 할인 특약 #그랑 콜레오스 무사고 할인 #그랑 콜레오스 장점 단점 차이점 #그랑 콜레오스 가입 순위 추천 #그랑 콜레오스 보험료 예상 #그랑 콜레오스 오토바이 보험료 #그랑 콜레오스 운전자 보험 #그랑 콜레오스 갱신 시점 #그랑 콜레오스 보험료 비교견적 #그랑 콜레오스 2026년식 보험료 #그랑 콜레오스 ADAS 할인</p>
+                </div>
+
+                <div class="comparison-form-box" style="margin-top: 40px;">
+                    <h2>그랑 콜레오스 맞춤형 견적 비교 입력란</h2>
+                    <p>정확한 정보를 입력하여 르노 그랑 콜레오스 최저가 보험료를 지금 바로 확인하세요.</p>
+                    <form action="#" method="post">
+                        <div class="form-group">
+                            <label for="car-info">차량 정보 입력 (차종, 연식)</label>
+                            <input type="text" id="car-info" placeholder="예: 르노 그랑 콜레오스 2024년형">
+                        </div>
+                        <div class="form-group">
+                            <label for="premium-start-date">보험 만기일 (갱신 예정일)</label>
+                            <input type="date" id="premium-start-date">
+                        </div>
+                        <div class="form-group">
+                            <label for="recent-accident-count">최근 1년 이내 사고 횟수</label>
+                            <select id="recent-accident-count">
+                                <option value="0">0회</option>
+                                <option value="1">1회</option>
+                                <option value="2">2회</option>
+                                <option value="3+">3회 이상</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="driver-coverage">운전자 범위 설정</label>
+                            <select id="driver-coverage">
+                                <option value="1">본인 한정</option>
+                                <option value="2">부부 한정</option>
+                                <option value="3">가족 한정</option>
+                                <option value="4">누구나 운전</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="cta-btn">맞춤형 견적 비교 시작하기</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ 섹션 -->
+        <section class="content-section">
+            <div class="container">
+                <h2>자주 묻는 질문 (FAQ)</h2>
+                <div class="faq-item">
+                    <h3 id="q1">그랑 콜레오스 보험료가 일반 국산 중형 SUV보다 비싼가요?</h3>
+                    <p>네, 그랑 콜레오스는 국산차로 분류되지만 르노의 글로벌 플랫폼을 공유하며 일부 부품이 수입산일 수 있어, 사고 시 수리비용이 일반적인 국산 중형 SUV보다 높게 책정될 가능성이 있습니다. 이는 보험사 손해율에 영향을 미쳐 보험료가 다소 높게 산정될 수 있는 요인입니다. 하지만 운전자 특성 및 할인 특약에 따라 국산차와 큰 차이가 나지 않을 수도 있습니다.</p>
+                </div>
+                <div class="faq-item">
+                    <h3 id="q2">그랑 콜레오스 마일리지 특약 할인율은 얼마나 되나요?</h3>
+                    <p>그랑 콜레오스 마일리지 특약의 할인율은 보험사와 주행거리에 따라 다르지만, 연간 주행거리 1만km 이하 운전자의 경우 15%~25% 내외의 할인을 받을 수 있습니다. 특히 2,000km~4,000km 구간처럼 주행거리가 매우 짧은 운전자는 최대 30% 이상의 할인을 받는 경우도 있습니다.</p>
+                </div>
+                <div class="faq-item">
+                    <h3 id="q3">그랑 콜레오스 첨단 안전장치 할인은 어떻게 적용되나요?</h3>
+                    <p>그랑 콜레오스에 기본으로 탑재되거나 옵션으로 추가되는 첨단 안전장치(ADAS)는 보험료 할인 특약으로 적용될 수 있습니다. 자동 긴급 제동장치(AEB), 차선 이탈 경고 장치(LDWS) 등이 대표적입니다. 보험 가입 시 해당 기능의 장착 여부를 고지하면, 보험사별로 정해진 할인율이 적용됩니다.</p>
+                </div>
+                <div class="faq-item">
+                    <h3 id="q4">그랑 콜레오스 보험료 견적을 비교하는 가장 좋은 방법은 무엇인가요?</h3>
+                    <p>그랑 콜레오스 보험료 견적을 비교하는 가장 좋은 방법은 다이렉트 보험 비교견적 사이트를 이용하는 것입니다. 여러 보험사의 견적을 한 번에 비교할 수 있으며, 각 보험사별로 다른 할인 특약(마일리지, ADAS)을 적용하여 가장 저렴한 견적을 찾아낼 수 있습니다. 이 방법을 통해 불필요한 비용 지출을 최소화할 수 있습니다.</p>
+                </div>
+            </div>
+        </section>
     </main>
-  </body>
-</html>
+
+    <!-- JavaScript for enhanced user experience (FAQ toggle) -->
+    <script>
+        document.querySelectorAll('.faq-item h3').forEach(item => {
+            item.addEventListener('click', event => {
+                const parent = item.parentElement;
+                parent.classList.toggle('active');
+                const p = parent.querySelector('p');
+                p.style.display = p.style.display === 'block' ? 'none' : 'block';
+            });
+        });
+    </script>
+
+
+  
